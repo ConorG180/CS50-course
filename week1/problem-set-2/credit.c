@@ -2,15 +2,10 @@
 
 long long requestCreditCardNum(void);
 
-
 int main(void)
 {
-    requestCreditCardNum();
+    long long cardNum = requestCreditCardNum();
 }
-
-
-
-
 
 
 
@@ -36,4 +31,5 @@ long long requestCreditCardNum(void)
             break;
         }
     }
+    return cardNum;
 }
