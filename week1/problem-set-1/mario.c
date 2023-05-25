@@ -2,6 +2,12 @@
 
 int main(void)
 {
+    int height = requestHeight();
+    buildPyramid(height);
+}
+
+int requestHeight(void)
+{
     // Get number from user
     int number;
     printf("Pyramid height (Must be between 1 and 8)\n");
@@ -20,7 +26,10 @@ int main(void)
             printf("Pyramid height (Must be between 1 and 8)\n");
         }
     }
+}
 
+void buildPyramid(int number) 
+{
     // Build pyramid
     for (int i = 1; i <= number; i++)
     {
