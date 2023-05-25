@@ -1,12 +1,53 @@
 #include <stdio.h>
 
 long long requestCreditCardNum(void);
+short isValid(long long);
 
-int main(void)
+void main(void)
 {
     long long cardNum = requestCreditCardNum();
+    long long tempCardNum = cardNum;
+    if (isValid(tempCardNum) != 1)
+    {
+        printf("card not valid");
+    }
 }
 
+
+
+
+short isValid(long long cardNum) {
+    int sum1 = 0;
+    int sum2 = 0;
+
+    int alternate = 0;
+    while(cardNum > 0) {
+        if (alternate == 0) {
+            // Add the last digit of num to sum1.
+            sum1 = sum1 + cardNum % 10;
+            alternate = 1;
+        } else {
+            // Multiply the last digit of num by 2, add the digits of the product to sum2.
+            int doubled = 2 * (cardNum % 10);
+            sum2 = sum2 + (doubled / 10) + (doubled % 10);
+            alternate = 0;
+        }
+
+        // Remove the last digit from num.
+        cardNum /= 10;
+    }
+
+    int totalSum = sum1 + sum2;
+    printf("Sum1: %d, Sum2: %d, Total Sum: %d\n", sum1, sum2, totalSum);
+    if (totalSum % 10 == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 
 long long requestCreditCardNum(void)
