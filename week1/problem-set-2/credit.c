@@ -6,17 +6,19 @@ short getCardNumLength(long long);
 short getFirstTwoDigits(long long cardNum);
 void checkCardType(short firstTwoDigits, short cardNumLength);
 
-void main(void)
+int main(void)
 {
     long long cardNum = requestCreditCardNum();
     if (isValid(cardNum) != 1)
     {
         printf("INVALID");
+        return 1;
     }
     short cardNumLength = getCardNumLength(cardNum);
     short firstTwoDigits = getFirstTwoDigits(cardNum);
     printf("First 2 digits: %i", firstTwoDigits);
     checkCardType(firstTwoDigits, cardNumLength);
+    return 1;
 }
 
 
