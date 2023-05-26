@@ -4,16 +4,19 @@ long long requestCreditCardNum(void);
 short isValid(long long);
 short getCardNumLength(long long);
 short getFirstTwoDigits(long long cardNum);
+void checkCardType(short firstTwoDigits, short cardNumLength);
 
 void main(void)
 {
     long long cardNum = requestCreditCardNum();
     if (isValid(cardNum) != 1)
     {
-        printf("card not valid");
+        printf("INVALID");
     }
+    short cardNumLength = getCardNumLength(cardNum);
     short firstTwoDigits = getFirstTwoDigits(cardNum);
     printf("First 2 digits: %i", firstTwoDigits);
+    checkCardType(firstTwoDigits, cardNumLength);
 }
 
 
@@ -96,4 +99,24 @@ short getFirstTwoDigits(long long cardNum)
     } 
     printf("First 2 digits: %i", firstTwoDigits);
     return (short) firstTwoDigits;
+}
+
+void checkCardType(short firstTwoDigits, short cardNumLength)
+{
+    if ((firstTwoDigits == 34 || firstTwoDigits == 37) && cardNumLength == 15)
+    {
+        printf("AMEX\n");
+    }
+    else if (firstTwoDigits >= 51 && firstTwoDigits <= 55 && cardNumLength == 16)
+    {
+        printf("MASTERCARD\n");
+    }
+    else if (firstTwoDigits / 10 == 4 && cardNumLength == 13 || cardNumLength == 16)
+    {
+        printf("VISA\n");
+    }
+    else
+    {
+        printf("UNKNOWN CARD BRAND");
+    }
 }
