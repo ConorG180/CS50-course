@@ -3,15 +3,17 @@
 long long requestCreditCardNum(void);
 short isValid(long long);
 short getCardNumLength(long long);
+short getFirstTwoDigits(long long cardNum);
 
 void main(void)
 {
     long long cardNum = requestCreditCardNum();
-    long long tempCardNum = cardNum;
-    if (isValid(tempCardNum) != 1)
+    if (isValid(cardNum) != 1)
     {
         printf("card not valid");
     }
+    short firstTwoDigits = getFirstTwoDigits(cardNum);
+    printf("First 2 digits: %i", firstTwoDigits);
 }
 
 
@@ -82,4 +84,16 @@ short getCardNumLength(long long cardNum)
         cardNumLength++;
     }
     return cardNumLength;
+}
+
+short getFirstTwoDigits(long long cardNum)
+{
+    printf("cardNum: %lld", cardNum);
+    long long firstTwoDigits = cardNum;
+    while(firstTwoDigits > 100)
+    {
+        firstTwoDigits /= 10;
+    } 
+    printf("First 2 digits: %i", firstTwoDigits);
+    return (short) firstTwoDigits;
 }
