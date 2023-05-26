@@ -2,6 +2,7 @@
 
 long long requestCreditCardNum(void);
 short isValid(long long);
+short getCardNumLength(long long);
 
 void main(void)
 {
@@ -12,6 +13,8 @@ void main(void)
         printf("card not valid");
     }
 }
+
+
 
 
 
@@ -59,12 +62,7 @@ long long requestCreditCardNum(void)
         int result = scanf("%lld", &cardNum);
 
         long long tempCardNum = cardNum;
-        short cardNumLength = 0;
-        while (tempCardNum != 0)
-        {
-            tempCardNum /= 10;
-            cardNumLength++;
-        }
+        short cardNumLength = getCardNumLength(tempCardNum);
         while(getchar() != '\n');
 
         if (result == 1 && cardNumLength >= 13 && cardNumLength <= 16)
@@ -73,4 +71,15 @@ long long requestCreditCardNum(void)
         }
     }
     return cardNum;
+}
+
+short getCardNumLength(long long cardNum)
+{
+    short cardNumLength = 0;
+    while (cardNum != 0)
+    {
+        cardNum /= 10;
+        cardNumLength++;
+    }
+    return cardNumLength;
 }
