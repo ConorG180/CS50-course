@@ -44,5 +44,13 @@ int checkCipher(char cipher[])
             printf("Error - String contains non-alphabetic characters");
             return 1;
         }
+        for (int j = i + 1; j < cipherLength; j++)
+        {
+            if(cipher[i] == cipher[j])
+            {
+                printf("Cipher contains repeated alphabetical characters");
+                return 1;
+            }
+        }
     }
 }
