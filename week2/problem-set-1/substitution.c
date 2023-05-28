@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // Function prototypes:
 int checkArguments(short numberOfArguments);
 int checkCipher(char cipher[]);
+char* requestPlainText();
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +18,9 @@ int main(int argc, char *argv[])
     {
         return 1;
     }
+
+    char* plainText = requestPlainText();
+    
 }
 
 int checkArguments(short numberOfArguments)
@@ -53,4 +58,27 @@ int checkCipher(char cipher[])
             }
         }
     }
+}
+
+char* requestPlainText()
+{
+    int maxLength = 501;
+
+    char* plainText = (char*)malloc(maxLength * sizeof(char));
+
+    if (plainText == NULL)
+    {
+        printf("Error - Memory allocation failed.\n");
+        return NULL;
+    }
+
+    printf("plaintext: ");
+    fgets(plainText, maxLength, stdin);
+
+    if (plainText[strlen(plainText) - 1] == '\n')
+    {
+        plainText[strlen(plainText) - 1] = '\0';
+    }
+
+    return plainText;
 }
