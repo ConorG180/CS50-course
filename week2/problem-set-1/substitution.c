@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 // Function prototypes:
 int checkArguments(short numberOfArguments);
 int checkCipher(char cipher[]);
 char* requestPlainText();
+char* convertCipher(char* plainText, char cipher[]);
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +22,12 @@ int main(int argc, char *argv[])
     }
 
     char* plainText = requestPlainText();
+    char * cipheredText = convertCipher(plainText, argv[1]);
+    printf("ciphertext: %s \n", cipheredText);
+    
+    free(plainText);
+    free(cipheredText);
+    return 0;
     
 }
 
@@ -81,4 +89,33 @@ char* requestPlainText()
     }
 
     return plainText;
+}
+
+
+char* convertCipher(char* plainText, char cipher[])
+{
+    int maxLength = 501;
+
+    char* cipheredText = (char*)malloc((maxLength + 1) * sizeof(char));
+
+    for (int i = 0; i < strlen(plainText); i++)
+    {
+        if (plainText[i] >= 65 && plainText[i] <= 90)
+        {
+            char cipherLetter = cipher[plainText[i] - 65];
+            cipheredText[i] = toupper(cipherLetter);
+        }
+        else if (plainText[i] >= 97 && plainText[i] <= 122)
+        {
+            char cipherLetter = cipher[plainText[i] - 97];
+            cipheredText[i] = tolower(cipherLetter);
+        }
+        else
+        {
+            char cipherLetter = cipher[plainText[i]];
+            cipheredText[i] = ' ';
+        }
+    }
+    cipheredText[strlen(plainText)] = '\0';
+    return cipheredText;
 }
