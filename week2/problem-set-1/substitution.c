@@ -33,9 +33,9 @@ int main(int argc, char *argv[])
 
 int checkArguments(short numberOfArguments)
 {
-    if (numberOfArguments > 2 || numberOfArguments < 2)
+    if (numberOfArguments != 2)
     {
-        printf("Error - There should be one sole argument provided");
+        printf("Error - There should be one sole argument provided\n");
         return 1;
     }
     return 0;
@@ -46,28 +46,33 @@ int checkCipher(char cipher[])
     short cipherLength = strlen(cipher);
     if (cipherLength != 26)
     {
-        printf("Error - String not 26 characters");
+        printf("Error - String not 26 characters\n");
         return 1;
     }
 
-    for (int i=0; i < cipherLength; i++)
+    int characterCount[26] = {0};
+
+    for (int i = 0; i < cipherLength; i++)
     {
         if (!isalpha(cipher[i]))
         {
-            printf("Error - String contains non-alphabetic characters");
+            printf("Error - String contains non-alphabetic characters\n");
             return 1;
         }
-        for (int j = i + 1; j < cipherLength; j++)
-        {
-            if(cipher[i] == cipher[j])
-            {
-                printf("Cipher contains repeated alphabetical characters");
-                return 1;
-            }
-        }
-    }
-}
 
+        char lowercaseChar = tolower(cipher[i]);
+
+        if (characterCount[lowercaseChar - 'a'] != 0)
+        {
+            printf("Error - Cipher contains repeated alphabetical characters\n");
+            return 1;
+        }
+
+        characterCount[lowercaseChar - 'a']++;
+    }
+
+    return 0;
+}
 char* requestPlainText()
 {
     int maxLength = 501;
