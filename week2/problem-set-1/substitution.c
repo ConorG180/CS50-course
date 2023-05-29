@@ -112,8 +112,8 @@ char* convertCipher(char* plainText, char cipher[])
         }
         else
         {
-            char cipherLetter = cipher[plainText[i]];
-            cipheredText[i] = ' ';
+            char cipherPunctuation = plainText[i];
+            cipheredText[i] = plainText[i];
         }
     }
     cipheredText[strlen(plainText)] = '\0';
