@@ -52,7 +52,7 @@ int checkCipher(char cipher[])
 
     for (int i=0; i < cipherLength; i++)
     {
-        if (cipher[i] < 65 || cipher[i] > 122)
+        if (!isalpha(cipher[i]))
         {
             printf("Error - String contains non-alphabetic characters");
             return 1;
